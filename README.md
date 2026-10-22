@@ -1,57 +1,108 @@
-# Salesforce DX Project
+# DataSentry Enterprise
 
-Salesforce DX is a development approach that brings source-driven development, team collaboration, and continuous integration to the Salesforce Platform. Instead of working directly in an org through a web browser, you work with metadata as source files in a local DX project, track changes in version control, and deploy through automated processes.
+**DataSentry Enterprise** is a Salesforce-centered data quality, governance, and reliability platform.
 
-This project template gets you started with the tools and structure you need to build Salesforce applications using source control, scratch orgs, and the Salesforce CLI.
+Its purpose is to identify incomplete, invalid, outdated, and potentially duplicated CRM data, manage findings, govern corrective actions, and track data quality over time.
 
-## Prerequisites
+## Project Architecture
 
-Before you start, make sure you have:
+The product will use two separate repositories:
 
-- **Salesforce CLI** - Download from [developer.salesforce.com/tools/salesforcecli](https://developer.salesforce.com/tools/salesforcecli). See [Install Salesforce CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm) for details.
-- **VS Code with Salesforce Extension Pack** - See [Installation Instructions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/install.html) for details. Includes the Agentforce Vibes extension.
-- **A development org** - Sign up for a free Developer Edition org [here](https://developer.salesforce.com/signup).
-- **Dev Hub enabled** (optional, required to create scratch orgs) - You can enable Dev Hub in your development org under Setup > Dev Hub. See [Provide Developers Access to Salesforce DX Tools](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_setup_dx_tools.htm).
+| Repository              | Responsibility                                                                                        |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| `datasentry-salesforce` | Salesforce DX, Lightning Web Components, Apex, Salesforce metadata, permissions, and Salesforce tests |
+| `datasentry-service`    | Java, Spring Boot, Apache Kafka, PostgreSQL, external event processing, and analytics                 |
 
-## Project Structure
+The repositories will be integrated through authenticated APIs and Salesforce change events when the relevant phases are implemented.
 
-Your DX project follows this structure:
+## Development Roadmap
 
-- **`force-app/main/default/`** - Your metadata source files live in this default package directory. You can configure additional package directories in the `sfdx-project.json` file.
-- **`config/`** - Scratch org definitions and project settings
-- **`scripts/`** - Automation scripts for common tasks
-- **`sfdx-project.json`** - Project manifest that defines package directories, namespace, API version, and other project-level settings
+### MVP — Salesforce Core
 
-See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm).
+- Requirements and project planning
+- Development environment and project foundation
+- Salesforce data model and security
+- Rule Studio and data-quality rule engine
+- Scan orchestration and background processing
+- Findings Workbench
+- Governed remediation and audit
+- Salesforce dashboards and reporting
+- Core testing and verification
 
-## Get Started
+### V2 — Event-Driven Integration
 
-Ready to start developing? The [Get Started with Salesforce DX](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_get_started_dx.htm) guide walks you through your first project, from creating a scratch org to creating a simple Apex class or LWC to deploying your code to a sandbox.
+- Spring Boot integration foundation
+- Salesforce Change Data Capture and Pub/Sub API
+- Apache Kafka event processing and recovery
 
-## Common Salesforce CLI Commands
+### V3 — Analytics and Production Readiness
 
-Here are common CLI commands that you'll use the most:
+- PostgreSQL analytics
+- Quality trends and anomaly detection
+- OpenTelemetry and monitoring
+- Security and performance hardening
+- CI/CD and deployment documentation
 
-- `sf org login web`: Authorize an org
-- `sf org open`: Open your org in a browser
-- `sf org create scratch`: Create a scratch org
-- `sf project deploy start`: Deploy metadata to your org
-- `sf project retrieve start`: Retrieve metadata from your org
-- `sf template generate <artifact>`: Scaffold new components, such as Apex classes and triggers, LWC components, Lightning apps, and more
-- `sf apex <command>`: Run Apex tests, run anonymous Apex blocks, and view logs
-- `sf data <command>`: Work with test data
-- `sf alias <command>`: Manage org aliases
-- `sf config <command>`: Configure CLI settings
+## Salesforce Development Prerequisites
 
-## Use Agentforce Vibes to Build Lightning Apps
+- Salesforce CLI
+- VS Code with Salesforce extensions
+- Node.js and npm
+- An authenticated Salesforce development org
 
-Transform your ideas into custom Lightning apps that extend CRM workflows directly in Lightning Experience. Through natural conversations with Agentforce Vibes, implement custom objects and fields, complex business logic, and dynamic UI components. See [Build a Lightning App Using Agentforce Vibes](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/lexapp-overview.html).
+## Setup
 
-## Additional Resources
+Install the project dependencies from the repository root:
 
-- [Agentforce Vibes Developer Guide](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html)
-- [Salesforce CLI Installation Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
-- [Salesforce CLI Plugin Development Guide](https://developer.salesforce.com/docs/platform/salesforce-cli-plugin/guide/conceptual-overview.html)
-- [Salesforce VS Code Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
+```bash
+npm ci
+```
+
+Verify the Salesforce CLI and authenticated orgs:
+
+```bash
+sf --version
+sf org list
+```
+
+## Validation Commands
+
+Run the available project checks:
+
+```bash
+npm test
+npm run lint
+npm run prettier:verify
+```
+
+The generated LWC Jest test is currently a placeholder. Passing it confirms the test runner works, but meaningful component behavior tests still need to be implemented.
+
+## Salesforce Deployment
+
+Deploy the starter component to the development org:
+
+```bash
+sf project deploy start \
+  --source-dir force-app/main/default/lwc/dataSentryHome \
+  --target-org DEV \
+  --wait 10
+```
+
+Confirm that `DEV` is the intended target before deploying.
+
+## Current Implementation Status
+
+- Salesforce DX project initialized.
+- Git repository initialized on `main`.
+- Starter LWC `dataSentryHome` generated and deployed to `DEV`.
+- npm dependencies installed.
+- Jest, ESLint, and Prettier checks executed successfully.
+- Salesforce data-quality functionality has not yet been implemented.
+
+## Development Principles
+
+- Salesforce remains the source of truth for CRM records.
+- Remediation must respect Salesforce authorization and validation.
+- External processing must handle retries and duplicate event delivery safely.
+- Sensitive credentials must not be committed to Git.
+- Each phase must be verified before proceeding to the next.
