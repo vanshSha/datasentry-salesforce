@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finding_Status_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula
+  >ISBLANK(TEXT(Finding_Status__c))</errorConditionFormula>
+    <errorDisplayField>Finding_Status__c</errorDisplayField>
+    <errorMessage
+  >Select a finding status before saving the record.</errorMessage>
+</ValidationRule>

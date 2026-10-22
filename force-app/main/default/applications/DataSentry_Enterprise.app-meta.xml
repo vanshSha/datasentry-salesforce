@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#123B5D</headerColor>
+        <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
+    </brand>
+    <description
+  >Central workspace for managing data-quality rules, scans, findings, remediation requests, and audit records in Salesforce.</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>DataSentry Enterprise</label>
+    <navType>Standard</navType>
+    <tabs>DQRule__c</tabs>
+    <tabs>DQScan__c</tabs>
+    <tabs>DQFinding__c</tabs>
+    <tabs>DQRemediationRequest__c</tabs>
+    <tabs>DQAudit__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>DataSentry_Enterprise_UtilityBar</utilityBar>
+</CustomApplication>
