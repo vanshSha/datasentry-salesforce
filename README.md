@@ -106,3 +106,15 @@ Confirm that `DEV` is the intended target before deploying.
 - External processing must handle retries and duplicate event delivery safely.
 - Sensitive credentials must not be committed to Git.
 - Each phase must be verified before proceeding to the next.
+
+## Audit Retention Policy
+
+- **Scope:** DataSentry audit records stored in `DQAudit__c`.
+- **Retention target:** 12 months from the audit timestamp for the MVP.
+- **Deletion:** No automatic deletion is implemented in the MVP.
+- **Access:** Audit records should be readable by authorized users and protected from unauthorized modification or deletion.
+- **Audit fields:** Record the action, related object, related record ID, acting user, timestamp, and relevant details.
+- **Data minimization:** Avoid storing passwords, credentials, or unnecessary sensitive data in audit details.
+- **Review:** Confirm the retention period against applicable legal, regulatory, contractual, and business requirements before production deployment.
+
+**Status:** Proposed MVP policy; production approval pending.
